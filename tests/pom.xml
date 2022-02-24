@@ -122,7 +122,7 @@
 					<artifactId>maven-surefire-plugin</artifactId>
 					<configuration combine.self="override">
 						<testFailureIgnore>false</testFailureIgnore>
-						<argLine>${jvm.arg.addOpens}</argLine>
+						<argLine>${jvm.arg.addOpens} -Dorg.aspectj.weaver.openarchives=20</argLine>
 						<includes>
 							<include>**/TestsModuleTests*</include>
 						</includes>
