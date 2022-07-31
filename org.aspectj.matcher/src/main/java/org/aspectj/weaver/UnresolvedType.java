@@ -633,8 +633,12 @@ public class UnresolvedType implements Traceable, TypeVariableDeclaringElement {
 		case 'J':
 			return "long";
 		case 'L':
-			String name = signature.substring(1, signature.length() - 1).replace('/', '.');
-			return name;
+			return signature.substring(1, signature.length() - 1)
+				.replace('/', '.')
+				// Some class files, e.g. 'package-info' without runtime-scoped annotations, can contain package names with
+				// backslash characters when compiled with Javac on Windows. This seems to be a bug in Javac (ECJ does it
+				// correctly). See https://github.com/eclipse/org.aspectj/issues/176.
+				.replace('\\', '.');
 		case 'T':
 			StringBuilder nameBuff2 = new StringBuilder();
 			int colon = signature.indexOf(";");
